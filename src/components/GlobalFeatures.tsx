@@ -1,8 +1,8 @@
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 import { ProviderMuiTheming } from "./ProviderMuiTheming";
 
 type Props = {
-  children: ReactElement;
+  children: ReactNode;
 };
 
 export function GlobalFeatures({ children }: Props) {

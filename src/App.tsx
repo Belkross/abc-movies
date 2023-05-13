@@ -1,10 +1,10 @@
-import { Typography } from "@mui/material";
 import { GlobalFeatures } from "./components/GlobalFeatures";
+import { HomeInterface } from "./components/HomeInterface";
 
 export default function App() {
   return (
     <GlobalFeatures>
-      <Typography variant="h1">Hello World !</Typography>
+      <HomeInterface />
     </GlobalFeatures>
   );
 }

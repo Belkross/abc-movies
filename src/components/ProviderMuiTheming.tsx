@@ -1,9 +1,9 @@
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createMuiTheme } from "../styles/createMuiTheme";
 
 type Props = {
-  children: ReactElement;
+  children: ReactNode;
 };
 
 export function ProviderMuiTheming({ children }: Props) {
