@@ -27,7 +27,8 @@
   "rules": {
     "unicorn/no-null": "off",
     "unicorn/filename-case": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "unicorn/prevent-abbreviations": "off"
   },
   "overrides": [
     {
