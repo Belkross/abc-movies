@@ -34,7 +34,7 @@ export class MemoryMoviePickRepo implements MoviePickRepo {
    *
    */
   async put(title: string) {
-    if (title.length) {
+    if (title.length > 0) {
       this.byFirstLetter.set([...title][0].toUpperCase(), title);
     }
   }

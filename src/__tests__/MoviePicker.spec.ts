@@ -1,3 +1,6 @@
+//@ts-nocheck
+//TODO: REMOVE COMMENT @ts-nocheck BEFORE WORKING WITH THIS FILE
+//TODO: REMOVE THE FILE’S LINT RULE OVERRIDE @typescript-eslint/ban-ts-comment BEFORE WORKING WITH THIS FILE
 import { MoviePickRepo } from "../MoviePicker/MoviePickRepo";
 import {
   MoviePicker,
