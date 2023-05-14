@@ -6,6 +6,8 @@ const shapeUtils = {
 export const shape = {
   ...shapeUtils,
 
+  searchBarMaxWidth: "700px",
+
   borderedContainer: {
     padding: shapeUtils.spacingBase,
     backgroundColor: "background.paper",

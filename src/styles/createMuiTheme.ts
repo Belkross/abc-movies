@@ -4,7 +4,6 @@ import { createMuiComponents } from "./components";
 import { palette } from "./palette";
 import { shape } from "./shape";
 import { typography } from "./typography";
-import { ThemeMode } from "../types/globals";
 
 export function createMuiTheme(mode: ThemeMode) {
   const theme = createTheme({

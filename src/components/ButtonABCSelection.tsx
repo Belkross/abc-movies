@@ -6,7 +6,7 @@ export function ButtonABCSelection() {
 
   return (
     <Button sx={style_button(theme)} startIcon={<ListIcon />}>
-      Open my ABC selection
+      Open my selection
     </Button>
   );
 }
