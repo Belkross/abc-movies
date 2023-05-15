@@ -1,19 +1,14 @@
 import { SxProps, TextField } from "@mui/material";
-import { ChangeEvent, SetStateAction, Dispatch } from "react";
 import { shape } from "../styles/shape";
+import { useAppDispatch, useAppSelector } from "../store/reduxHooks";
+import { ChangeEvent } from "react";
+import { updateTitle } from "../store/features/movieSearchSlice";
 
-type Props = {
-  movieSearch: MovieSearch;
-  setMovieSearch: Dispatch<SetStateAction<MovieSearch>>;
-};
+export function SearchBar() {
+  const { title } = useAppSelector((state) => state.movieSearch);
+  const dispatch = useAppDispatch();
 
-export function SearchBar({ movieSearch, setMovieSearch }: Props) {
-  const { title } = movieSearch;
-
-  const onInputChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setMovieSearch((prevState) => ({ ...prevState, title: value, page: 1 }));
-  };
+  const onInputChange = async (event: ChangeEvent<HTMLInputElement>) => dispatch(updateTitle(event.target.value));
 
   return (
     <TextField
@@ -29,4 +24,5 @@ export function SearchBar({ movieSearch, setMovieSearch }: Props) {
 const style_textfield: SxProps = {
   width: "100%",
   maxWidth: shape.searchBarMaxWidth,
+  marginBottom: 6,
 };

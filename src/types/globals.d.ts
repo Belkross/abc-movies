@@ -10,29 +10,33 @@ type MovieSearchResult = {
   Poster: string;
 };
 
-type MovieSearch = {
-  title: string;
-  page: number;
-  pageResults: Array<MovieSearchResult>;
-  totalResults: number;
-};
+interface Movie {
+  Title: string;
+  Year: string;
+  Actors: string;
+  Plot: string;
+  Poster: string;
+  imdbID: string;
+  Type: "movie";
+}
 
-type AsyncOutcome<Type = undefined> =
-  | {
-      succeeded: true;
-      payload: Type;
-    }
-  | {
-      succeeded: false;
-      payload?: undefined;
-    };
-
-type GetMoviePayload =
+type SearchMoviesResponse =
   | {
       Response: "True";
       Search: Array<MovieSearchResult>;
       totalResults: string;
     }
+  | {
+      Response: "False";
+      Error: string;
+    };
+
+interface GetMovieResponseSuccess extends Movie {
+  Response: "True";
+}
+
+type GetMovieResponse =
+  | GetMovieResponseSuccess
   | {
       Response: "False";
       Error: string;

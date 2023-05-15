@@ -9,10 +9,7 @@ interface JSON {
    * If a member contains nested objects, the nested objects are transformed before the parent object is.
    */
   // eslint-disable-next-line  @typescript-eslint/method-signature-style, @typescript-eslint/no-explicit-any
-  parse(
-    text: string,
-    reviver?: (this: any, key: string, value: any) => any
-  ): unknown;
+  parse(text: string, reviver?: (this: any, key: string, value: any) => any): unknown;
   /**
    * Converts a JavaScript value to a JavaScript Object Notation (JSON) string.
    * @param value A JavaScript value, usually an object or array, to be converted.
@@ -20,11 +17,7 @@ interface JSON {
    * @param space Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read.
    */
   // eslint-disable-next-line  @typescript-eslint/method-signature-style, @typescript-eslint/no-explicit-any
-  stringify(
-    value: any,
-    replacer?: (this: any, key: string, value: any) => any,
-    space?: string | number
-  ): string;
+  stringify(value: any, replacer?: (this: any, key: string, value: any) => any, space?: string | number): string;
   /**
    * Converts a JavaScript value to a JavaScript Object Notation (JSON) string.
    * @param value A JavaScript value, usually an object or array, to be converted.
@@ -32,11 +25,7 @@ interface JSON {
    * @param space Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read.
    */
   // eslint-disable-next-line  @typescript-eslint/method-signature-style, @typescript-eslint/no-explicit-any
-  stringify(
-    value: any,
-    replacer?: (number | string)[] | null,
-    space?: string | number
-  ): string;
+  stringify(value: any, replacer?: (number | string)[] | null, space?: string | number): string;
 }
 
 interface Body {

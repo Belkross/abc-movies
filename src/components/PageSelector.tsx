@@ -1,24 +1,16 @@
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import { Stack, IconButton, Typography, SxProps } from "@mui/material";
 import { shape } from "../styles/shape";
-import { Dispatch, SetStateAction } from "react";
 import { getTotalPages } from "../helpers/getTotalPages";
+import { useAppDispatch, useAppSelector } from "../store/reduxHooks";
+import { updatePage } from "../store/features/movieSearchSlice";
 
-type Props = {
-  movieSearch: MovieSearch;
-  setMovieSearch: Dispatch<SetStateAction<MovieSearch>>;
-};
-
-export function PageSelector({ movieSearch, setMovieSearch }: Props) {
-  const { totalResults, page } = movieSearch;
+export function PageSelector() {
+  const { totalResults, page } = useAppSelector((state) => state.movieSearch);
+  const dispatch = useAppDispatch();
   const totalPages = getTotalPages(totalResults);
 
-  const handleNewPage = (newPage: number) => {
-    setMovieSearch((prevState) => ({
-      ...prevState,
-      page: newPage,
-    }));
-  };
+  const handleNewPage = (newPage: number) => dispatch(updatePage(newPage));
 
   return (
     <Stack sx={style_container}>

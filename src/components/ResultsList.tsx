@@ -1,36 +1,43 @@
-import { Button, Chip, Stack, SxProps, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Button, Chip, Stack, SxProps, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { shape } from "../styles/shape";
+import { display } from "../store/features/modalMovieDetailSlice";
+import { useAppDispatch, useAppSelector } from "../store/reduxHooks";
+import NoPhotographyIcon from "@mui/icons-material/NoPhotography";
 
-type Props = {
-  movieSearch: MovieSearch;
-};
-
-export function ResultsList({ movieSearch }: Props) {
-  const { pageResults } = movieSearch;
+export function ResultsList() {
+  const { pageResults, errorMessage, title } = useAppSelector((state) => state.movieSearch);
+  const dispatch = useAppDispatch();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const noResult = pageResults.length === 0;
 
   const list = pageResults.map((movie) => {
     const alt = `poster of the movie ${movie.Title}`;
+    const posterAvailable = movie.Poster !== "N/A";
+    const handleClick = () => dispatch(display(movie.imdbID));
 
     return (
-      <Button key={movie.imdbID} sx={style_searchResults}>
-        <img src={movie.Poster} alt={alt} style={style_picture(isSmallScreen)} />
+      <Button key={movie.imdbID} sx={style_searchResults} onClick={handleClick}>
+        {posterAvailable ? (
+          <img src={movie.Poster} alt={alt} style={style_picture(isSmallScreen)} />
+        ) : (
+          <Box sx={style_picture(isSmallScreen)}>
+            <NoPhotographyIcon />
+          </Box>
+        )}
 
         <Stack sx={style_resultData}>
           <Typography>{movie.Title}</Typography>
           <Typography>{movie.Year}</Typography>
-          <Typography>id: {movie.imdbID}</Typography>
-
           <Chip label={movie.Type} size="small" />
         </Stack>
       </Button>
     );
   });
 
-  const result = pageResults.length === 0 ? <Typography>No movie found...</Typography> : <>{list}</>;
+  const ErrorMessage = title ? <Typography>{errorMessage}</Typography> : null;
 
-  return <Stack sx={style_container}>{result}</Stack>;
+  return <Stack sx={style_container}>{noResult ? ErrorMessage : list}</Stack>;
 }
 
 const style_container: SxProps = {
@@ -53,22 +60,26 @@ const style_searchResults: SxProps = {
 
   ":hover": {
     borderWidth: shape.borderedContainer.borderWidth,
-    borderColor: "secondary.main",
+    borderColor: "primary.main",
   },
 };
 
 const style_resultData: SxProps = {
   alignItems: { xs: "center", sm: "start" },
-  gap: 0.5,
+  gap: 1.2,
   width: "100%",
 
   textAlign: { xs: "center", sm: "start" },
 };
 
 const style_picture = (isSmallScreen: boolean) => {
-  const size = isSmallScreen ? "150px" : "150px";
+  const size = isSmallScreen ? "120px" : "140px";
 
   return {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+
     width: size,
     height: size,
     borderRadius: shape.borderRadius,

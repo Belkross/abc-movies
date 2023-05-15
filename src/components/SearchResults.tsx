@@ -2,32 +2,38 @@ import { Stack, SxProps, Typography } from "@mui/material";
 import { PageSelector } from "./PageSelector";
 import { ResultsList } from "./ResultsList";
 import { shape } from "../styles/shape";
-import { Dispatch, SetStateAction } from "react";
+import { useAppDispatch, useAppSelector } from "../store/reduxHooks";
+import { CircularProgressIndeterminate } from "./CircularProgressIndeterminate";
+import { useEffect } from "react";
+import { fetchMovies } from "../store/features/movieSearchSlice";
 
-type Props = {
-  movieSearch: MovieSearch;
-  setMovieSearch: Dispatch<SetStateAction<MovieSearch>>;
-};
-
-export function SearchResults({ movieSearch, setMovieSearch }: Props) {
-  const { pageResults, totalResults } = movieSearch;
+export function SearchResults() {
+  const { pageResults, totalResults, status, title, page } = useAppSelector((state) => state.movieSearch);
+  const dispatch = useAppDispatch();
   const someResultFound = pageResults.length > 0;
+  const loading = status === "pending";
+  const resultFoundText = `Click on a result to open details (found ${totalResults} ${
+    totalResults > 1 ? "movies" : "movie"
+  })`;
 
-  return (
+  useEffect(() => {
+    if (title) {
+      dispatch(fetchMovies({ title, page }));
+    }
+  }, [dispatch, title, page]);
+
+  return loading ? (
+    <CircularProgressIndeterminate />
+  ) : (
     <Stack sx={style_container}>
-      {someResultFound && (
-        <Typography>{`Click on a result to open details (found ${totalResults} ${
-          totalResults > 1 ? "movies" : "movie"
-        })`}</Typography>
-      )}
-      <ResultsList movieSearch={movieSearch} />
-      {someResultFound && <PageSelector movieSearch={movieSearch} setMovieSearch={setMovieSearch} />}
+      {someResultFound && <Typography>{resultFoundText}</Typography>}
+      <ResultsList />
+      {someResultFound && <PageSelector />}
     </Stack>
   );
 }
 
 const style_container: SxProps = {
-  marginTop: 6,
   gap: shape.spacingBase,
   alignItems: "center",
 
