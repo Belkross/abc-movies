@@ -23,7 +23,7 @@ const schema = Joi.object<GetMovieResponse>({
     .required(),
   Error: Joi.string(),
   Title: Joi.string().required(),
-  Year: Joi.string().pattern(/^\d{4}$/),
+  Year: Joi.string().regex(/^\d{4}$/),
   Actors: Joi.string(),
   Plot: Joi.string(),
   Poster: Joi.string(),
