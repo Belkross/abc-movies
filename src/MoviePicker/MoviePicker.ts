@@ -1,7 +1,7 @@
 import { MoviePickRepo } from "./MoviePickRepo";
 
 export class MoviePicker {
-  storage: MoviePickRepo;
+  private storage: MoviePickRepo;
 
   constructor(moviePickRepo: MoviePickRepo) {
     this.storage = moviePickRepo;

@@ -1,20 +1,10 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Chip,
-  SxProps,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardActions, CardContent, CardHeader, CardMedia, Chip, SxProps, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../store/reduxHooks";
 import { ButtonCloseElement } from "./ButtonCloseElement";
 import { remove } from "../store/features/modalMovieDetailSlice";
 import { shape } from "../styles/shape";
 import NoPhotographyIcon from "@mui/icons-material/NoPhotography";
+import { ButtonPickMovie } from "./ButtonPickMovie";
 
 export function MovieDetailsCard() {
   const { Title, Year, Type, Poster, Plot, Actors } = useAppSelector((state) => state.modalMovieDetail.movie);
@@ -38,7 +28,7 @@ export function MovieDetailsCard() {
         <Chip label={Type} />
       </CardContent>
       <CardActions disableSpacing>
-        <Button>Add to selection</Button>
+        <ButtonPickMovie Title={Title} />
       </CardActions>
     </Card>
   );
