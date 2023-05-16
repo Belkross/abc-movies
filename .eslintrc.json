@@ -17,23 +17,12 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "unicorn",
-    "react-hooks",
-    "promise"
-  ],
+  "plugins": ["react", "@typescript-eslint", "unicorn", "react-hooks", "promise"],
   "rules": {
     "unicorn/no-null": "off",
     "unicorn/filename-case": "off",
     "react/react-in-jsx-scope": "off",
     "unicorn/prevent-abbreviations": "off"
   },
-  "overrides": [
-    {
-      "files": "src/__tests__/MoviePicker.spec.ts",
-      "rules": { "@typescript-eslint/ban-ts-comment": "off" }
-    }
-  ]
+  "overrides": []
 }

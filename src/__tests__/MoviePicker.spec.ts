@@ -1,12 +1,5 @@
-//@ts-nocheck
-//TODO: REMOVE COMMENT @ts-nocheck BEFORE WORKING WITH THIS FILE
-//TODO: REMOVE THE FILE’S LINT RULE OVERRIDE @typescript-eslint/ban-ts-comment BEFORE WORKING WITH THIS FILE
 import { MoviePickRepo } from "../MoviePicker/MoviePickRepo";
-import {
-  MoviePicker,
-  MoviePickAlreadyExistError,
-  EmptyMovieTitleError,
-} from "../MoviePicker/MoviePicker";
+import { MoviePicker, MoviePickAlreadyExistError, EmptyMovieTitleError } from "../MoviePicker/MoviePicker";
 import { MemoryMoviePickRepo } from "../MoviePicker/MemoryMoviePickRepo";
 
 //------------------------------------------------------------------------------
@@ -45,28 +38,26 @@ describe("MoviePicker", () => {
       const title = "Bohemian Rhapsody";
       await moviePicker.pick(title);
 
+      //picking the same movie again
       await expect(async () => {
         await moviePicker.pick(title);
       }).rejects.toThrow(MoviePickAlreadyExistError);
 
+      //picking another movie with same first letter uppercased
       await expect(async () => {
         await moviePicker.pick("Barton Fink");
       }).rejects.toThrow(MoviePickAlreadyExistError);
 
+      //picking another movie with same first letter lowercased
       await expect(async () => {
         await moviePicker.pick("batman");
       }).rejects.toThrow(MoviePickAlreadyExistError);
     }
   );
   //----------------------------------------------------------------------------
-  it(
-    "should throw EmptyMovieTitleError " +
-      "on MoviePicker.pick " +
-      "when given movie title is empty",
-    async () => {
-      await expect(async () => {
-        await moviePicker.pick("");
-      }).rejects.toThrow(EmptyMovieTitleError);
-    }
-  );
+  it("should throw EmptyMovieTitleError " + "on MoviePicker.pick " + "when given movie title is empty", async () => {
+    await expect(async () => {
+      await moviePicker.pick("");
+    }).rejects.toThrow(EmptyMovieTitleError);
+  });
 });
