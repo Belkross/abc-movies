@@ -1,10 +1,10 @@
-import { red } from "@mui/material/colors";
+import { blue, red } from "@mui/material/colors";
 
 const smoothWhiteText = "rgba(255, 255, 255, .85)";
 const smoothBlackText = "rgba(0, 0, 0, .85)";
 
 const darkModePalette = {
-  primary: { main: "#1056A5" },
+  primary: { main: blue[700] },
   secondary: { main: red[700] },
 
   text: {
