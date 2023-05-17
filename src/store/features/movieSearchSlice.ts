@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { searchMovies } from "../../api/searchMovies";
+import { omdbService } from "../../services/Omdb";
 
 interface SearchState {
   status: "idle" | "pending" | "succeeded" | "failed";
@@ -18,7 +18,7 @@ const initialState: SearchState = {
   totalResults: 0,
 };
 
-export const fetchMovies = createAsyncThunk("movie/fetchMovies", searchMovies);
+export const fetchMovies = createAsyncThunk("movie/fetchMovies", omdbService.searchMovie);
 
 export const movieSearchSlice = createSlice({
   name: "movieSearch",

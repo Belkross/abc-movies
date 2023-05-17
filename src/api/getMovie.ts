@@ -1,8 +1,13 @@
 import Joi from "joi";
-import { OMDB_URL } from "../constants";
 
-export async function getMovie(id: string): Promise<GetMovieResponse> {
-  const url = `${OMDB_URL}?apikey=${import.meta.env.VITE_OMDB_API_KEY}&i=${id}`;
+type Parameters = {
+  origin: string;
+  apiKey: string;
+  id: string;
+};
+
+export async function requestGetMovie({ origin, apiKey, id }: Parameters): Promise<GetMovieResponse> {
+  const url = `${origin}?apikey=${apiKey}&i=${id}`;
 
   try {
     const response = await fetch(url);

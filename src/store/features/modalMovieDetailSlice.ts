@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { getMovie } from "../../api/getMovie";
+import { omdbService } from "../../services/Omdb";
 
 interface ModalMovieDetailState {
   status: "idle" | "pending" | "succeeded" | "failed";
@@ -26,7 +26,7 @@ const initialState: ModalMovieDetailState = {
   },
 };
 
-export const fetchMovie = createAsyncThunk("movie/fetchMovie", getMovie);
+export const fetchMovie = createAsyncThunk("movie/fetchMovie", omdbService.getMovie);
 
 export const modalMovieDetailSlice = createSlice({
   name: "modalMovieDetail",
