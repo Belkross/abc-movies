@@ -15,17 +15,17 @@ export function ModalMovieDetails() {
   const handleClose = () => dispatch(remove());
 
   useEffect(() => {
-    dispatch(fetchMovie(displayedMovieId));
-  }, [dispatch, displayedMovieId]);
+    if (displayed) dispatch(fetchMovie(displayedMovieId));
+  }, [displayed, dispatch, displayedMovieId]);
 
   return (
-    <Dialog open={displayed} PaperProps={{ sx: style_container }} onClose={handleClose} fullScreen={smallScreen}>
+    <Dialog open={displayed} PaperProps={{ sx: style_paper }} onClose={handleClose} fullScreen={smallScreen}>
       {loading ? <CircularProgressIndeterminate /> : <MovieDetailsCard />}
     </Dialog>
   );
 }
 
-const style_container: SxProps = {
+const style_paper: SxProps = {
   justifyContent: "center",
   alignItems: "center",
 

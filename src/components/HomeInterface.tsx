@@ -6,11 +6,9 @@ import { SearchBar } from "./SearchBar";
 import { ModalMovieDetails } from "./ModalMovieDetails";
 import { DrawerABCSelection } from "./DrawerABCSelection";
 import { SearchResults } from "./SearchResults";
-import { useAppSelector } from "../store/reduxHooks";
 import { useTemporaryElement } from "../hooks/useTemporaryElement";
 
 export function HomeInterface() {
-  const modalState = useAppSelector((state) => state.modalMovieDetail);
   const drawer = useTemporaryElement(false);
 
   return (
@@ -24,7 +22,7 @@ export function HomeInterface() {
         </Stack>
       </Box>
 
-      {modalState.displayed && <ModalMovieDetails />}
+      <ModalMovieDetails />
       <DrawerABCSelection displayed={drawer.displayed} closeDrawer={drawer.remove} />
     </>
   );
