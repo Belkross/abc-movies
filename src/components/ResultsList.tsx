@@ -73,7 +73,7 @@ const style_resultData: SxProps = {
 };
 
 const style_picture = (isSmallScreen: boolean) => {
-  const size = isSmallScreen ? "120px" : "140px";
+  const size = isSmallScreen ? "150px" : "110px";
 
   return {
     display: "flex",
@@ -81,12 +81,12 @@ const style_picture = (isSmallScreen: boolean) => {
     justifyContent: "center",
 
     width: size,
+    maxWidth: isSmallScreen ? "none" : "90px",
     height: size,
     borderRadius: shape.borderRadius,
     borderWidth: "1px",
     borderStyle: "solid",
     borderColor: "grey",
-
     backgroundColor: "background.border",
   };
 };
