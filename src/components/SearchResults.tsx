@@ -12,9 +12,9 @@ export function SearchResults() {
   const dispatch = useAppDispatch();
   const someResultFound = pageResults.length > 0;
   const loading = status === "pending";
-  const resultFoundText = `Click on a result to open details (found ${totalResults} ${
+  const resultFoundText = `Click on a result to open details - found ${totalResults} ${
     totalResults > 1 ? "movies" : "movie"
-  })`;
+  }`;
 
   useEffect(() => {
     if (title) {
