@@ -1,3 +1,8 @@
+# Instructions
+
+The instructions related to the project can be found here:
+[Instructions](./INSTRUCTIONS.md)
+
 # Deployment
 
 1.  create a .env file at the root of the project
