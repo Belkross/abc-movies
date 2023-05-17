@@ -86,5 +86,7 @@ const style_picture = (isSmallScreen: boolean) => {
     borderWidth: "1px",
     borderStyle: "solid",
     borderColor: "grey",
+
+    backgroundColor: "background.border",
   };
 };

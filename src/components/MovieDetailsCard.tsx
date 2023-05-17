@@ -71,4 +71,5 @@ const style_posterPlaceholder: SxProps = {
   borderWidth: "1px",
   borderStyle: "solid",
   borderColor: "grey",
+  backgroundColor: "background.border",
 };
