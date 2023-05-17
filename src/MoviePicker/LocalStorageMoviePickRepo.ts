@@ -1,3 +1,4 @@
+import { ALPHABET } from "../constants";
 import { MoviePickRepo } from "./MoviePickRepo";
 
 export class LocalStorageMoviePickRepo implements MoviePickRepo {
@@ -9,12 +10,12 @@ export class LocalStorageMoviePickRepo implements MoviePickRepo {
 
   async getAll() {
     return new Promise<Array<string>>((resolve, reject) => {
-      const uppercasedAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const uppercasedAlphabet = ALPHABET.toUpperCase();
       const output: Array<string> = [];
 
       for (const letter of uppercasedAlphabet) {
         const storedTitle = window.localStorage.getItem(letter);
-        if (storedTitle) output.push(storedTitle);
+        output.push(storedTitle || "");
       }
 
       resolve(output);
