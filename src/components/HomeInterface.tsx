@@ -1,4 +1,4 @@
-import { Box, Stack, SxProps } from "@mui/material";
+import { Stack, SxProps } from "@mui/material";
 import { shape } from "../styles/shape";
 import { Header } from "./Header";
 import { ButtonABCSelection } from "./ButtonABCSelection";
@@ -13,14 +13,17 @@ export function HomeInterface() {
 
   return (
     <>
-      <Box component="main" sx={style_container}>
-        <Header />
-        <ButtonABCSelection openDrawer={drawer.display} />
+      <Stack component="main" sx={style_container}>
+        <Stack sx={style_headerContainer}>
+          <Header />
+          <ButtonABCSelection openDrawer={drawer.display} />
+        </Stack>
+
         <Stack sx={style_searchFeature}>
           <SearchBar />
           <SearchResults />
         </Stack>
-      </Box>
+      </Stack>
 
       <ModalMovieDetails />
       <DrawerABCSelection displayed={drawer.displayed} closeDrawer={drawer.remove} />
@@ -29,12 +32,16 @@ export function HomeInterface() {
 }
 
 const style_container: SxProps = {
-  display: "flex",
-  flexFlow: "column nowrap",
   alignItems: "center",
-  gap: 4,
+  gap: 3,
 
   padding: shape.spacingBase,
+};
+
+const style_headerContainer: SxProps = {
+  flexFlow: { xs: "column nowrap", md: "row nowrap" },
+  alignItems: "center",
+  gap: { xs: 3, md: 5 },
 };
 
 const style_searchFeature: SxProps = {
