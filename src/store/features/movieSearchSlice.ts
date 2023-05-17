@@ -31,6 +31,7 @@ export const movieSearchSlice = createSlice({
     updatePage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
+    clearResults: () => initialState,
   },
   extraReducers(builder) {
     builder
@@ -57,6 +58,6 @@ export const movieSearchSlice = createSlice({
   },
 });
 
-export const { updateTitle, updatePage } = movieSearchSlice.actions;
+export const { updateTitle, updatePage, clearResults } = movieSearchSlice.actions;
 
 export default movieSearchSlice.reducer;

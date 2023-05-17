@@ -5,7 +5,7 @@ import { shape } from "../styles/shape";
 import { useAppDispatch, useAppSelector } from "../store/reduxHooks";
 import { CircularProgressIndeterminate } from "./CircularProgressIndeterminate";
 import { useEffect } from "react";
-import { fetchMovies } from "../store/features/movieSearchSlice";
+import { clearResults, fetchMovies } from "../store/features/movieSearchSlice";
 
 export function SearchResults() {
   const { pageResults, totalResults, status, title, page } = useAppSelector((state) => state.movieSearch);
@@ -17,9 +17,8 @@ export function SearchResults() {
   }`;
 
   useEffect(() => {
-    if (title) {
-      dispatch(fetchMovies({ title, page }));
-    }
+    if (title.length > 0) dispatch(fetchMovies({ title, page }));
+    else dispatch(clearResults());
   }, [dispatch, title, page]);
 
   return loading ? (
