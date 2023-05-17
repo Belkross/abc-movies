@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, SxProps } from "@mui/material";
 import { LocalStorageMoviePickRepo } from "../MoviePicker/LocalStorageMoviePickRepo";
 import { MoviePicker } from "../MoviePicker/MoviePicker";
 import { useState } from "react";
@@ -19,11 +19,16 @@ export function ButtonPickMovie({ Title }: Props) {
   };
 
   return (
-    <Button onClick={handleClick} disabled={disabled}>
+    <Button onClick={handleClick} disabled={disabled} sx={style_button}>
       {disabled ? `Character ${firstCharacter.toUpperCase()} fulfilled` : "Add to selection"}
     </Button>
   );
 }
+
+const style_button: SxProps = {
+  backgroundColor: "secondary.main",
+  borderColor: "secondary.main",
+};
 
 function checkIfLetterFulfilled(firstCharacter: string): boolean {
   const firstCharacterIsALetter = /^[a-z]$/i.test(firstCharacter);
