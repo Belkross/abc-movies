@@ -18,8 +18,12 @@ export async function requestSearchMovies({ origin, apiKey, title, page }: Param
     if (error) throw new Error(error.message);
     return value;
   } catch (error) {
-    console.error(error);
-    throw new Error(error as string);
+    let errorMessage;
+    if (error instanceof Error) errorMessage = error.message;
+    else errorMessage = String(error);
+
+    console.error(errorMessage);
+    throw new Error(errorMessage);
   }
 }
 

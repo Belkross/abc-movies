@@ -22,7 +22,8 @@
     "unicorn/no-null": "off",
     "unicorn/filename-case": "off",
     "react/react-in-jsx-scope": "off",
-    "unicorn/prevent-abbreviations": "off"
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/prefer-ternary": "off"
   },
   "overrides": []
 }
