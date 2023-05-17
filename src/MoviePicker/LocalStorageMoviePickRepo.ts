@@ -3,13 +3,13 @@ import { MoviePickRepo } from "./MoviePickRepo";
 
 export class LocalStorageMoviePickRepo implements MoviePickRepo {
   async getByFirstLetter(firstLetter: string) {
-    return new Promise<string | null>((resolve, reject) => {
+    return new Promise<string | null>((resolve) => {
       resolve(window.localStorage.getItem(firstLetter.toUpperCase()));
     });
   }
 
   async getAll() {
-    return new Promise<Array<string>>((resolve, reject) => {
+    return new Promise<Array<string>>((resolve) => {
       const uppercasedAlphabet = ALPHABET.toUpperCase();
       const output: Array<string> = [];
 
@@ -23,7 +23,7 @@ export class LocalStorageMoviePickRepo implements MoviePickRepo {
   }
 
   async put(title: string) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve) => {
       const titleNotEmpty = title.length > 0;
       if (titleNotEmpty) window.localStorage.setItem(title.charAt(0).toUpperCase(), title);
       resolve();
