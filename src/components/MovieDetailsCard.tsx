@@ -63,7 +63,8 @@ const style_posterPlaceholder: SxProps = {
   alignItems: "center",
   justifyContent: "center",
 
-  width: 200,
+  width: "100%",
+  maxWidth: 600,
   height: 200,
   margin: "auto",
 
