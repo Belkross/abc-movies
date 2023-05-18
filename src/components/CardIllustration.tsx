@@ -1,20 +1,17 @@
-import { CardMedia, Box, SxProps } from "@mui/material";
+import { CardMedia, SxProps } from "@mui/material";
 import { useAppSelector } from "../store/reduxHooks";
-import NoPhotographyIcon from "@mui/icons-material/NoPhotography";
 import { shape } from "../styles/shape";
+import { PosterPlaceholder } from "./PosterPlaceholder";
 
-export function CardIllustration({ posterAvailable }: { posterAvailable: boolean }) {
+export function CardIllustration({ posterProvided }: { posterProvided: boolean }) {
   const { Title, Poster } = useAppSelector((state) => state.modalMovieDetail.movie);
-  const alt = posterAvailable ? `poster of the movie ${Title}` : "";
+  const alt = posterProvided ? `poster of the movie ${Title}` : "";
 
-  const providedPoster = <CardMedia component="img" src={Poster} alt={alt} sx={style_poster} />;
-  const placeHolder = (
-    <Box sx={style_posterPlaceholder}>
-      <NoPhotographyIcon />
-    </Box>
-  );
-
-  return posterAvailable ? providedPoster : placeHolder;
+  if (posterProvided) {
+    return <CardMedia component="img" src={Poster} alt={alt} sx={style_poster} />;
+  } else {
+    return <PosterPlaceholder sx={style_posterPlaceholder} />;
+  }
 }
 
 const style_poster: SxProps = {

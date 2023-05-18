@@ -1,30 +1,20 @@
-import { Box, Button, Chip, Stack, SxProps, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Button, Chip, Stack, SxProps, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { shape } from "../styles/shape";
 import { display } from "../store/features/modalMovieDetailSlice";
 import { useAppDispatch, useAppSelector } from "../store/reduxHooks";
-import NoPhotographyIcon from "@mui/icons-material/NoPhotography";
+import { PosterPlaceholder } from "./PosterPlaceholder";
 
 export function ResultsList() {
-  const { pageResults, errorMessage, title } = useAppSelector((state) => state.movieSearch);
+  const { pageResults, errorMessage } = useAppSelector((state) => state.movieSearch);
   const dispatch = useAppDispatch();
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const noResult = pageResults.length === 0;
 
   const list = pageResults.map((movie) => {
-    const alt = `poster of the movie ${movie.Title}`;
-    const posterAvailable = movie.Poster !== "N/A";
     const handleClick = () => dispatch(display(movie.imdbID));
 
     return (
       <Button key={movie.imdbID} sx={style_searchResults} onClick={handleClick}>
-        {posterAvailable ? (
-          <img src={movie.Poster} alt={alt} style={style_picture(isSmallScreen)} />
-        ) : (
-          <Box sx={style_picture(isSmallScreen)}>
-            <NoPhotographyIcon />
-          </Box>
-        )}
+        <Poster movie={movie} />
 
         <Stack sx={style_resultData}>
           <Typography>{movie.Title}</Typography>
@@ -35,9 +25,23 @@ export function ResultsList() {
     );
   });
 
-  const ErrorMessage = title ? <Typography>{errorMessage}</Typography> : null;
+  const ErrorMessage = <Typography>{errorMessage}</Typography>;
 
   return <Stack sx={style_container}>{noResult ? ErrorMessage : list}</Stack>;
+}
+
+function Poster({ movie }: { movie: MovieSearchResult }) {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const alt = `poster of the movie ${movie.Title}`;
+  const posterProvided = movie.Poster !== "N/A";
+
+  if (posterProvided) {
+    return <img src={movie.Poster} alt={alt} style={style_picture(isSmallScreen)} />;
+  } else {
+    return <PosterPlaceholder sx={style_picture(isSmallScreen)} />;
+  }
 }
 
 const style_container: SxProps = {

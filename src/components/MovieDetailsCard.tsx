@@ -8,12 +8,12 @@ import { CardIllustration } from "./CardIllustration";
 export function MovieDetailsCard() {
   const { Title, Year, Type, Poster, Plot, Actors } = useAppSelector((state) => state.modalMovieDetail.movie);
   const dispatch = useAppDispatch();
-  const posterAvailable = Poster !== "N/A";
+  const posterProvided = Poster !== "N/A";
 
   return (
     <Card sx={style_container}>
       <CardHeader action={<ButtonCloseElement onClick={() => dispatch(remove())} />} title={Title} subheader={Year} />
-      <CardIllustration posterAvailable={posterAvailable} />
+      <CardIllustration posterProvided={posterProvided} />
       <CardContent sx={style_content}>
         <Typography>
           <Typography component="span" sx={style_partTitle}>

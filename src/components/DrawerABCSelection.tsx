@@ -34,6 +34,19 @@ export function DrawerABCSelection({ displayed, closeDrawer }: Props) {
   );
 }
 
+function useUpdateABCSelection(drawerDisplayed: boolean, setTitles: Dispatch<SetStateAction<Array<string>>>) {
+  useEffect(() => {
+    const getSelectionedMovies = async () => {
+      if (drawerDisplayed) {
+        const titles = await PickedMoviesStorage.getAll();
+        setTitles(titles);
+      }
+    };
+
+    getSelectionedMovies();
+  }, [drawerDisplayed, setTitles]);
+}
+
 const style_paper: SxProps = {
   gap: 0.5,
   width: "100%",
@@ -55,16 +68,3 @@ const style_header: SxProps = {
 const style_buttonClose: SxProps = {
   alignSelf: "end",
 };
-
-function useUpdateABCSelection(drawerDisplayed: boolean, setTitles: Dispatch<SetStateAction<Array<string>>>) {
-  useEffect(() => {
-    const getSelectionedMovies = async () => {
-      if (drawerDisplayed) {
-        const titles = await PickedMoviesStorage.getAll();
-        setTitles(titles);
-      }
-    };
-
-    getSelectionedMovies();
-  }, [drawerDisplayed, setTitles]);
-}

@@ -21,15 +21,17 @@ export function SearchResults() {
     else dispatch(clearResults());
   }, [dispatch, title, page]);
 
-  return loading ? (
-    <CircularProgressIndeterminate />
-  ) : (
-    <Stack sx={style_container}>
-      {someResultFound && <Typography>{resultFoundText}</Typography>}
-      <ResultsList />
-      {someResultFound && <PageSelector />}
-    </Stack>
-  );
+  if (loading) {
+    return <CircularProgressIndeterminate />;
+  } else {
+    return (
+      <Stack sx={style_container}>
+        {someResultFound && <Typography>{resultFoundText}</Typography>}
+        <ResultsList />
+        {someResultFound && <PageSelector />}
+      </Stack>
+    );
+  }
 }
 
 const style_container: SxProps = {
