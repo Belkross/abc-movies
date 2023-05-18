@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../store/reduxHooks";
 import { CircularProgressIndeterminate } from "./CircularProgressIndeterminate";
 import { useEffect } from "react";
 import { clearResults, fetchMovies } from "../store/features/movieSearch/movieSearchSlice";
+import { TYPING_WINDOW } from "../constants";
 
 export function SearchResults() {
   const { pageResults, totalResults, status, title, page } = useAppSelector((state) => state.movieSearch);
@@ -16,9 +17,19 @@ export function SearchResults() {
     totalResults > 1 ? "movies" : "movie"
   }`;
 
+  //fetch the the movies with debouncing to avoid firing a request for each character typed from the user
   useEffect(() => {
-    if (title.length > 0) dispatch(fetchMovies({ title, page }));
-    else dispatch(clearResults());
+    let fetchData: NodeJS.Timeout;
+
+    if (title.length > 0) {
+      fetchData = setTimeout(() => {
+        dispatch(fetchMovies({ title, page }));
+      }, TYPING_WINDOW);
+    } else {
+      dispatch(clearResults());
+    }
+
+    return () => clearTimeout(fetchData);
   }, [dispatch, title, page]);
 
   if (loading) {
