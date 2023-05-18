@@ -3,7 +3,7 @@ import { Stack, IconButton, Typography, SxProps } from "@mui/material";
 import { shape } from "../styles/shape";
 import { getTotalPages } from "../helpers/getTotalPages";
 import { useAppDispatch, useAppSelector } from "../store/reduxHooks";
-import { updatePage } from "../store/features/movieSearchSlice";
+import { updatePage } from "../store/features/movieSearch/movieSearchSlice";
 
 export function PageSelector() {
   const { totalResults, page } = useAppSelector((state) => state.movieSearch);

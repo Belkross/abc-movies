@@ -5,7 +5,7 @@ import { shape } from "../styles/shape";
 import { useAppDispatch, useAppSelector } from "../store/reduxHooks";
 import { CircularProgressIndeterminate } from "./CircularProgressIndeterminate";
 import { useEffect } from "react";
-import { clearResults, fetchMovies } from "../store/features/movieSearchSlice";
+import { clearResults, fetchMovies } from "../store/features/movieSearch/movieSearchSlice";
 
 export function SearchResults() {
   const { pageResults, totalResults, status, title, page } = useAppSelector((state) => state.movieSearch);

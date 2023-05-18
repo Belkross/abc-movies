@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { omdbService } from "../../services/Omdb";
+import { omdbService } from "../../../services/Omdb";
+import { interpreteErrorMessage } from "./interpreteErrorMessage";
 
 interface SearchState {
   status: "idle" | "pending" | "succeeded" | "failed";
@@ -47,13 +48,13 @@ export const movieSearchSlice = createSlice({
         } else {
           state.totalResults = 0;
           state.pageResults = [];
-          state.errorMessage = action.payload.Error;
+          state.errorMessage = interpreteErrorMessage(action.payload.Error);
           state.status = "failed";
         }
       })
       .addCase(fetchMovies.rejected, (state, action) => {
         state.status = "failed";
-        state.errorMessage = action.error.message;
+        state.errorMessage = interpreteErrorMessage(action.error.message);
       });
   },
 });

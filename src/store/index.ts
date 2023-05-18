@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modalMovieDetailSlice from "./features/modalMovieDetailSlice";
-import movieSearchSlice from "./features/movieSearchSlice";
+import movieSearchSlice from "./features/movieSearch/movieSearchSlice";
 
 export const store = configureStore({
   reducer: {
