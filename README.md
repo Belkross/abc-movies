@@ -15,7 +15,7 @@ The instructions related to the project can be found here:
 
 # Deployment
 
-To run a local version of the project, follow these instructions:
+## Run a local version of the app
 
 1. clone the project: `git clone https://github.com/Belkross/abc-movies.git`
 2. move to the project folder: `cd abc-movies`
@@ -28,3 +28,7 @@ To run a local version of the project, follow these instructions:
 6. The app is now available in your web navigator here: http://localhost:5173
 
 WARNING: You might experience a white screen during around 30 seconds for the first time you launch the app.
+
+## Run the tests
+
+      npm run test
