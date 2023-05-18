@@ -1,4 +1,4 @@
-import { Drawer, SxProps, Typography } from "@mui/material";
+import { Drawer, Stack, SxProps, Typography } from "@mui/material";
 import { LocalStorageMoviePickRepo } from "../MoviePicker/LocalStorageMoviePickRepo";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ALPHABET } from "../constants";
@@ -24,7 +24,11 @@ export function DrawerABCSelection({ displayed, closeDrawer }: Props) {
 
   return (
     <Drawer variant="temporary" anchor="right" open={displayed} onClose={closeDrawer} PaperProps={{ sx: style_paper }}>
-      <ButtonCloseElement onClick={() => closeDrawer()} sx={style_buttonClose} />
+      <Stack sx={style_header}>
+        <ButtonCloseElement onClick={() => closeDrawer()} sx={style_buttonClose} />
+        <Typography variant="h2">Movie selection</Typography>
+      </Stack>
+
       {moviePickedList}
     </Drawer>
   );
@@ -38,6 +42,14 @@ const style_paper: SxProps = {
   backgroundImage: "none",
 
   ...shape.borderedContainer,
+};
+
+const style_header: SxProps = {
+  flexFlow: "row-reverse nowrap",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: 2,
+  marginBottom: 3,
 };
 
 const style_buttonClose: SxProps = {
