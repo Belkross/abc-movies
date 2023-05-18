@@ -1,4 +1,4 @@
-import { blue, lightGreen } from "@mui/material/colors";
+import { blue, lightGreen, orange } from "@mui/material/colors";
 
 const smoothWhiteText = "rgba(255, 255, 255, .85)";
 const smoothBlackText = "rgba(0, 0, 0, .85)";
@@ -10,6 +10,7 @@ const darkModePalette = {
   text: {
     primary: smoothWhiteText,
     opposite: smoothBlackText,
+    noticeable: orange[500],
   },
   background: {
     default: "#0a1929",

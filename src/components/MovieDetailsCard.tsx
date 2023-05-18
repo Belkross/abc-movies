@@ -23,8 +23,18 @@ export function MovieDetailsCard() {
         </Box>
       )}
       <CardContent sx={style_content}>
-        <Typography>Plot: {Plot}</Typography>
-        <Typography>Actors: {Actors}</Typography>
+        <Typography>
+          <Typography component="span" sx={style_partTitle}>
+            Plot:{" "}
+          </Typography>
+          {Plot}
+        </Typography>
+        <Typography>
+          <Typography component="span" sx={style_partTitle}>
+            Actors:{" "}
+          </Typography>
+          {Actors}
+        </Typography>
         <Chip label={Type} />
       </CardContent>
       <CardActions disableSpacing>
@@ -73,4 +83,8 @@ const style_posterPlaceholder: SxProps = {
   borderStyle: "solid",
   borderColor: "grey",
   backgroundColor: "background.border",
+};
+
+const style_partTitle: SxProps = {
+  color: "text.noticeable",
 };
