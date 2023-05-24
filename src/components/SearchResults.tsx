@@ -9,13 +9,9 @@ import { clearResults, fetchMovies } from "../store/features/movieSearch/movieSe
 import { TYPING_WINDOW } from "../constants";
 
 export function SearchResults() {
-  const { pageResults, totalResults, status, title, page } = useAppSelector((state) => state.movieSearch);
+  const { status, title, page } = useAppSelector((state) => state.movieSearch);
   const dispatch = useAppDispatch();
-  const someResultFound = pageResults.length > 0;
-  const loading = status === "pending";
-  const resultFoundText = `Click on a result to open details - found ${totalResults} ${
-    totalResults > 1 ? "movies" : "movie"
-  }`;
+  const isFetching = status === "pending";
 
   //fetch the the movies with debouncing to avoid firing a request for each character typed from the user
   useEffect(() => {
@@ -32,17 +28,27 @@ export function SearchResults() {
     return () => clearTimeout(fetchData);
   }, [dispatch, title, page]);
 
-  if (loading) {
-    return <CircularProgressIndeterminate />;
-  } else {
+  if (isFetching) return <CircularProgressIndeterminate />;
+  else return <Results />;
+}
+
+function Results() {
+  const { pageResults, totalResults, errorMessage } = useAppSelector((state) => state.movieSearch);
+  const noResults = pageResults.length <= 0;
+  const resultFoundText = `Click on a result to open details - found ${totalResults} ${
+    totalResults > 1 ? "movies" : "movie"
+  }`;
+
+  if (errorMessage) return <Typography>{errorMessage}</Typography>;
+  else if (noResults) return null;
+  else
     return (
       <Stack sx={style_container}>
-        {someResultFound && <Typography>{resultFoundText}</Typography>}
+        <Typography>{resultFoundText}</Typography>
         <ResultsList />
-        {someResultFound && <PageSelector />}
+        <PageSelector />
       </Stack>
     );
-  }
 }
 
 const style_container: SxProps = {

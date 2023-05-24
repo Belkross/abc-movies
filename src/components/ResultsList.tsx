@@ -5,9 +5,8 @@ import { useAppDispatch, useAppSelector } from "../store/reduxHooks";
 import { PosterPlaceholder } from "./PosterPlaceholder";
 
 export function ResultsList() {
-  const { pageResults, errorMessage } = useAppSelector((state) => state.movieSearch);
+  const { pageResults } = useAppSelector((state) => state.movieSearch);
   const dispatch = useAppDispatch();
-  const noResult = pageResults.length === 0;
 
   const list = pageResults.map((movie) => {
     const handleClick = () => dispatch(display(movie.imdbID));
@@ -25,9 +24,7 @@ export function ResultsList() {
     );
   });
 
-  const ErrorMessage = <Typography>{errorMessage}</Typography>;
-
-  return <Stack sx={style_container}>{noResult ? ErrorMessage : list}</Stack>;
+  return <Stack sx={style_container}>{list}</Stack>;
 }
 
 function Poster({ movie }: { movie: MovieSearchResult }) {
