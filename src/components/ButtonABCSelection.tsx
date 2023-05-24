@@ -2,14 +2,14 @@ import { Button, SxProps, Theme, useTheme } from "@mui/material";
 import ListIcon from "@mui/icons-material/ListAlt";
 
 type Props = {
-  openDrawer: FlowlessFunction;
+  onClick: FlowlessFunction;
 };
 
-export function ButtonABCSelection({ openDrawer }: Props) {
+export function ButtonABCSelection({ onClick }: Props) {
   const theme = useTheme();
 
   return (
-    <Button sx={style_button(theme)} startIcon={<ListIcon />} onClick={() => openDrawer()}>
+    <Button sx={style_button(theme)} startIcon={<ListIcon />} onClick={() => onClick()}>
       Open my selection
     </Button>
   );

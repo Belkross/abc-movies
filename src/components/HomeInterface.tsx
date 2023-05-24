@@ -16,7 +16,7 @@ export function HomeInterface() {
       <Stack component="main" sx={style_container}>
         <Stack sx={style_headerContainer}>
           <Header />
-          <ButtonABCSelection openDrawer={drawer.display} />
+          <ButtonABCSelection onClick={drawer.display} />
         </Stack>
 
         <Stack sx={style_searchFeature}>
