@@ -33,13 +33,14 @@ export function SearchResults() {
 }
 
 function Results() {
-  const { pageResults, totalResults, errorMessage } = useAppSelector((state) => state.movieSearch);
+  const { pageResults, totalResults, errorMessage, status } = useAppSelector((state) => state.movieSearch);
+  const fetchFailed = status === "failed";
   const noResults = pageResults.length <= 0;
   const resultFoundText = `Click on a result to open details - found ${totalResults} ${
     totalResults > 1 ? "movies" : "movie"
   }`;
 
-  if (errorMessage) return <Typography>{errorMessage}</Typography>;
+  if (fetchFailed) return <Typography>{errorMessage}</Typography>;
   else if (noResults) return null;
   else
     return (
