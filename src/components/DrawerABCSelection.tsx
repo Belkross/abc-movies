@@ -37,13 +37,11 @@ export function DrawerABCSelection({ displayed, closeDrawer }: Props) {
 function useUpdateABCSelection(drawerDisplayed: boolean, setTitles: Dispatch<SetStateAction<Array<string>>>) {
   useEffect(() => {
     const getSelectionedMovies = async () => {
-      if (drawerDisplayed) {
-        const titles = await PickedMoviesStorage.getAll();
-        setTitles(titles);
-      }
+      const titles = await PickedMoviesStorage.getAll();
+      setTitles(titles);
     };
 
-    getSelectionedMovies();
+    if (drawerDisplayed) getSelectionedMovies();
   }, [drawerDisplayed, setTitles]);
 }
 
