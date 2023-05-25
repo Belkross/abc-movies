@@ -9,7 +9,7 @@ import { MovieDetailsCard } from "./MovieDetailsCard";
 export function ModalMovieDetails() {
   const { displayed, displayedMovieId, status } = useAppSelector((state) => state.modalMovieDetail);
   const smallScreen = useMediaQuery(useTheme().breakpoints.down("md"));
-  const loading = status === "pending";
+  const isFetching = status === "pending";
   const dispatch = useAppDispatch();
 
   const handleClose = () => dispatch(remove());
@@ -20,7 +20,7 @@ export function ModalMovieDetails() {
 
   return (
     <Dialog open={displayed} PaperProps={{ sx: style_paper }} onClose={handleClose} fullScreen={smallScreen}>
-      {loading ? <CircularProgressIndeterminate /> : <MovieDetailsCard />}
+      {isFetching ? <CircularProgressIndeterminate /> : <MovieDetailsCard />}
     </Dialog>
   );
 }
