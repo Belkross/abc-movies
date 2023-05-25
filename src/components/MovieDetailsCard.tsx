@@ -6,34 +6,40 @@ import { ButtonPickMovie } from "./ButtonPickMovie";
 import { CardIllustration } from "./CardIllustration";
 
 export function MovieDetailsCard() {
-  const { Title, Year, Type, Poster, Plot, Actors } = useAppSelector((state) => state.modalMovieDetail.movie);
+  const { movie, status, errorMessage } = useAppSelector((state) => state.modalMovieDetail);
+  const { Title, Year, Type, Poster, Plot, Actors } = movie;
   const dispatch = useAppDispatch();
   const posterProvided = Poster !== "N/A";
+  const fetchFailed = status === "failed";
 
-  return (
-    <Card sx={style_container}>
-      <CardHeader action={<ButtonCloseElement onClick={() => dispatch(remove())} />} title={Title} subheader={Year} />
-      <CardIllustration posterProvided={posterProvided} />
-      <CardContent sx={style_content}>
-        <Typography>
-          <Typography component="span" sx={style_partTitle}>
-            Plot:{" "}
+  if (fetchFailed) {
+    return <Typography>Error: {errorMessage}</Typography>;
+  } else {
+    return (
+      <Card sx={style_container}>
+        <CardHeader action={<ButtonCloseElement onClick={() => dispatch(remove())} />} title={Title} subheader={Year} />
+        <CardIllustration posterProvided={posterProvided} />
+        <CardContent sx={style_content}>
+          <Typography>
+            <Typography component="span" sx={style_partTitle}>
+              Plot:{" "}
+            </Typography>
+            {Plot}
           </Typography>
-          {Plot}
-        </Typography>
-        <Typography>
-          <Typography component="span" sx={style_partTitle}>
-            Actors:{" "}
+          <Typography>
+            <Typography component="span" sx={style_partTitle}>
+              Actors:{" "}
+            </Typography>
+            {Actors}
           </Typography>
-          {Actors}
-        </Typography>
-        <Chip label={Type} />
-      </CardContent>
-      <CardActions disableSpacing>
-        <ButtonPickMovie Title={Title} />
-      </CardActions>
-    </Card>
-  );
+          <Chip label={Type} />
+        </CardContent>
+        <CardActions disableSpacing>
+          <ButtonPickMovie Title={Title} />
+        </CardActions>
+      </Card>
+    );
+  }
 }
 
 const style_container: SxProps = {

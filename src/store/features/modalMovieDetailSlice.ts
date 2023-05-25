@@ -46,9 +46,13 @@ export const modalMovieDetailSlice = createSlice({
         state.status = "pending";
       })
       .addCase(fetchMovie.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        if (action.payload.Response === "True") state.movie = action.payload;
-        else state.errorMessage = action.payload.Error;
+        if (action.payload.Response === "True") {
+          state.status = "succeeded";
+          state.movie = action.payload;
+        } else {
+          state.status = "failed";
+          state.errorMessage = action.payload.Error;
+        }
       })
       .addCase(fetchMovie.rejected, (state, action) => {
         state.status = "failed";
