@@ -8,13 +8,6 @@ This is the prototype I made before starting the development of the app
 
 ![app prototype](./public/abc-movies-prototype.png)
 
-# Instructions
-
-The instructions related to the project can be found here:
-[Instructions](./INSTRUCTIONS.md)
-
-# Deployment
-
 ## Run a local version of the app
 
 1. clone the project: `git clone https://github.com/Belkross/abc-movies.git`
@@ -27,8 +20,3 @@ The instructions related to the project can be found here:
 5. launch the app locally: `npm run dev`
 6. The app is now available in your web navigator here: http://localhost:5173
 
-WARNING: You might experience a white screen during around 30 seconds for the first time you launch the app.
-
-## Run the tests
-
-      npm run test
